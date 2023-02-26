@@ -31,120 +31,160 @@ namespace WinFormsApp.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            passwordVerifyField = new TextBox();
+            passwordVerifyLabel = new Label();
+            registerBtn = new Button();
+            passwordField = new TextBox();
+            usernameField = new TextBox();
+            passwordLabel = new Label();
+            usernameLabel = new Label();
+            titleLabel = new Label();
+            showHideBtn = new Button();
+            showHide2Btn = new Button();
+            SuspendLayout();
             // 
-            // textBox3
+            // passwordVerifyField
             // 
-            this.textBox3.Location = new System.Drawing.Point(100, 404);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(301, 28);
-            this.textBox3.TabIndex = 25;
+            passwordVerifyField.Font = new Font("Microsoft Sans Serif", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            passwordVerifyField.Location = new Point(77, 408);
+            passwordVerifyField.Margin = new Padding(4);
+            passwordVerifyField.Name = "passwordVerifyField";
+            passwordVerifyField.Size = new Size(261, 32);
+            passwordVerifyField.TabIndex = 25;
             // 
-            // label4
+            // passwordVerifyLabel
             // 
-            this.label4.Location = new System.Drawing.Point(100, 368);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(302, 32);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "Подтвердите пароль";
+            passwordVerifyLabel.Location = new Point(77, 372);
+            passwordVerifyLabel.Margin = new Padding(4, 0, 4, 0);
+            passwordVerifyLabel.Name = "passwordVerifyLabel";
+            passwordVerifyLabel.Size = new Size(302, 32);
+            passwordVerifyLabel.TabIndex = 24;
+            passwordVerifyLabel.Text = "Подтвердите пароль";
             // 
-            // button2
+            // registerBtn
             // 
-            this.button2.Location = new System.Drawing.Point(100, 465);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(302, 56);
-            this.button2.TabIndex = 23;
-            this.button2.Text = "Регистрироваться";
-            this.button2.UseVisualStyleBackColor = true;
+            registerBtn.Location = new Point(77, 469);
+            registerBtn.Margin = new Padding(4);
+            registerBtn.Name = "registerBtn";
+            registerBtn.Size = new Size(302, 56);
+            registerBtn.TabIndex = 23;
+            registerBtn.Text = "Регистрироваться";
+            registerBtn.UseVisualStyleBackColor = true;
+            registerBtn.Click += registerBtn_ClickAsync;
             // 
-            // textBox2
+            // passwordField
             // 
-            this.textBox2.Location = new System.Drawing.Point(100, 305);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(301, 28);
-            this.textBox2.TabIndex = 22;
+            passwordField.Font = new Font("Microsoft Sans Serif", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            passwordField.Location = new Point(77, 309);
+            passwordField.Margin = new Padding(4);
+            passwordField.Name = "passwordField";
+            passwordField.Size = new Size(261, 32);
+            passwordField.TabIndex = 22;
             // 
-            // textBox1
+            // usernameField
             // 
-            this.textBox1.Location = new System.Drawing.Point(100, 218);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(301, 28);
-            this.textBox1.TabIndex = 21;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            usernameField.Font = new Font("Microsoft Sans Serif", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            usernameField.Location = new Point(77, 222);
+            usernameField.Margin = new Padding(4);
+            usernameField.Name = "usernameField";
+            usernameField.Size = new Size(301, 32);
+            usernameField.TabIndex = 21;
             // 
-            // label3
+            // passwordLabel
             // 
-            this.label3.Location = new System.Drawing.Point(100, 269);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(302, 32);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "Пароль";
+            passwordLabel.Location = new Point(77, 273);
+            passwordLabel.Margin = new Padding(4, 0, 4, 0);
+            passwordLabel.Name = "passwordLabel";
+            passwordLabel.Size = new Size(302, 32);
+            passwordLabel.TabIndex = 20;
+            passwordLabel.Text = "Пароль";
             // 
-            // label2
+            // usernameLabel
             // 
-            this.label2.Location = new System.Drawing.Point(100, 182);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(302, 32);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Имя пользователя";
+            usernameLabel.Location = new Point(77, 186);
+            usernameLabel.Margin = new Padding(4, 0, 4, 0);
+            usernameLabel.Name = "usernameLabel";
+            usernameLabel.Size = new Size(302, 32);
+            usernameLabel.TabIndex = 19;
+            usernameLabel.Text = "Имя пользователя";
             // 
-            // label1
+            // titleLabel
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label1.Location = new System.Drawing.Point(100, 99);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(302, 48);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Register";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            titleLabel.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            titleLabel.Location = new Point(77, 103);
+            titleLabel.Margin = new Padding(5, 0, 5, 0);
+            titleLabel.Name = "titleLabel";
+            titleLabel.Size = new Size(302, 48);
+            titleLabel.TabIndex = 18;
+            titleLabel.Text = "Register";
+            titleLabel.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // showHideBtn
+            // 
+            showHideBtn.BackColor = Color.Transparent;
+            showHideBtn.BackgroundImage = Properties.Resources.hide_svgrepo_com;
+            showHideBtn.BackgroundImageLayout = ImageLayout.Zoom;
+            showHideBtn.FlatAppearance.BorderSize = 0;
+            showHideBtn.FlatStyle = FlatStyle.Flat;
+            showHideBtn.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            showHideBtn.Location = new Point(345, 308);
+            showHideBtn.Name = "showHideBtn";
+            showHideBtn.Size = new Size(33, 32);
+            showHideBtn.TabIndex = 26;
+            showHideBtn.UseVisualStyleBackColor = false;
+            showHideBtn.Click += showHideBtn_Click;
+            // 
+            // showHide2Btn
+            // 
+            showHide2Btn.BackColor = Color.Transparent;
+            showHide2Btn.BackgroundImage = Properties.Resources.hide_svgrepo_com;
+            showHide2Btn.BackgroundImageLayout = ImageLayout.Zoom;
+            showHide2Btn.FlatAppearance.BorderSize = 0;
+            showHide2Btn.FlatStyle = FlatStyle.Flat;
+            showHide2Btn.Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            showHide2Btn.Location = new Point(346, 407);
+            showHide2Btn.Name = "showHide2Btn";
+            showHide2Btn.Size = new Size(33, 32);
+            showHide2Btn.TabIndex = 27;
+            showHide2Btn.UseVisualStyleBackColor = false;
+            showHide2Btn.Click += showHide2Btn_Click;
             // 
             // Register
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 687);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Register";
-            this.Text = "Register";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(10F, 22F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(456, 653);
+            Controls.Add(showHide2Btn);
+            Controls.Add(showHideBtn);
+            Controls.Add(passwordVerifyField);
+            Controls.Add(passwordVerifyLabel);
+            Controls.Add(registerBtn);
+            Controls.Add(passwordField);
+            Controls.Add(usernameField);
+            Controls.Add(passwordLabel);
+            Controls.Add(usernameLabel);
+            Controls.Add(titleLabel);
+            Font = new Font("Microsoft Sans Serif", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            Margin = new Padding(4);
+            Name = "Register";
+            Text = "Register";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox passwordVerifyField;
+        private System.Windows.Forms.Label passwordVerifyLabel;
 
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button registerBtn;
+        private System.Windows.Forms.TextBox passwordField;
+        private System.Windows.Forms.TextBox usernameField;
+        private System.Windows.Forms.Label passwordLabel;
+        private System.Windows.Forms.Label usernameLabel;
+        private System.Windows.Forms.Label titleLabel;
 
         #endregion
+
+        private Button showHideBtn;
+        private Button showHide2Btn;
     }
 }

@@ -1,39 +1,69 @@
-﻿namespace WinFormsApp.Forms;
+﻿using WinFormsApp.Entities;
+using WinFormsApp.Helpers;
+using WinFormsApp.Interfaces.Services;
+
+namespace WinFormsApp.Forms;
 
 public partial class Register : Form
 {
-    public Register()
+    private bool isPasswordVisible = true;
+    private bool isPasswordVerifyVisible = true;
+
+    private readonly Login _login;
+    private readonly IUserService _userService;
+
+    public Register(Login login, IUserService userService)
     {
+        _login = login;
+        _userService = userService;
+
         InitializeComponent();
-    }
-        
-    private void label2_Click(object sender, EventArgs e)
-    {
-        textBox1.Focus();
+
+        MaximizeBox = false;
+        MinimizeBox = false;
     }
 
-    private void textBox1_TextChanged(object sender, EventArgs e)
+    private async void registerBtn_ClickAsync(object sender, EventArgs e)
     {
-        throw new System.NotImplementedException();
-    }
+        var username = usernameField.Text.Trim();
+        var password = passwordField.Text;
+        var passwordVerify = passwordVerifyField.Text;
         
-    private void label3_Click(object sender, EventArgs e)
-    {
-        textBox2.Focus();
+        if (!FieldValidator.IsUsernameValid(username) || 
+            !FieldValidator.IsPasswordValid(password) ||
+            !FieldValidator.DoPasswordsMatch(password, passwordVerify)) 
+        {
+            return;
+        }
+
+        if (await _userService.UserExists(username))
+        {
+            MessageBox.Show("Username already taken");
+            return;
+        }
+
+        await _userService.AddUserAsync(new AppUser {
+            Username = username, 
+            Password = password 
+        });
+
+        _login.UpdateLoginFields(username, password);
+
+        Hide();
+        _login.Show();
     }
-        
-    private void textBox2_TextChanged(object sender, EventArgs e)
+
+    private void showHideBtn_Click(object sender, EventArgs e)
     {
-        throw new System.NotImplementedException();
+        isPasswordVisible = !isPasswordVisible;
+
+        passwordField.PasswordChar = !isPasswordVisible ? '•' : '\0';
     }
-        
-    private void label4_Click(object sender, EventArgs e)
+
+    private void showHide2Btn_Click(object sender, EventArgs e)
     {
-        textBox3.Focus();
-    }
-        
-    private void textBox3_TextChanged(object sender, EventArgs e)
-    {
-        throw new System.NotImplementedException();
+        isPasswordVerifyVisible = !isPasswordVerifyVisible;
+
+        passwordVerifyField.PasswordChar = !isPasswordVerifyVisible ? '•' : '\0';
     }
 }

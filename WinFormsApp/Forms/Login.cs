@@ -1,29 +1,103 @@
-﻿namespace WinFormsApp.Forms;
+﻿using WinFormsApp.Helpers;
+using WinFormsApp.Interfaces.Services;
+
+namespace WinFormsApp.Forms;
 
 public partial class Login : Form
 {
-    public Login()
+    private bool isPasswordVisible = true;
+    private const string UserFilename = "user.txt";
+
+    private readonly Home _home;
+    private readonly IUserService _userService;
+    private readonly IPasswordHashService _passwordHashService;
+
+    public Login(Home home, IUserService userService, IPasswordHashService passwordHashService)
     {
+        _home = home;
+        _userService = userService;
+        _passwordHashService = passwordHashService;
+
         InitializeComponent();
+        InitializeFields();
+
+        MaximizeBox = false;
+        MinimizeBox = false;
     }
 
-    private void label2_Click(object sender, EventArgs e)
+    private async void LoginBtn_Click(object sender, EventArgs e)
     {
-        textBox1.Focus();
+        string username = usernameField.Text.Trim();
+        string password = passwordField.Text;
+
+        if(!FieldValidator.IsUsernameValid(username) || !FieldValidator.IsPasswordValid(password))
+        {
+            return;
+        }
+        
+        UpdateCheckbox(username, password);
+
+        var user = await _userService.GetUserByUsername(username);
+        if(user == null)
+        {
+            MessageBox.Show("Username not found");
+            return;
+        }
+
+        if(!_passwordHashService.VerifyPassword(password, user.Password))
+        {
+            MessageBox.Show("Password is incorrect");
+            return;
+        }
+
+        Hide();
+        _home.Show();
     }
 
-    private void textBox1_TextChanged(object sender, EventArgs e)
+    private void showHideBtn_Click(object sender, EventArgs e)
     {
-        throw new System.NotImplementedException();
+        isPasswordVisible = !isPasswordVisible;
+
+        passwordField.PasswordChar = !isPasswordVisible ? '•' : '\0';
     }
 
-    private void label3_Click(object sender, EventArgs e)
+
+    private void registerBtn_Click(object sender, EventArgs e)
     {
-        textBox2.Focus();
+        var register = new Register(this, _userService);
+        Hide();
+        register.Show();
     }
 
-    private void textBox2_TextChanged(object sender, EventArgs e)
+    public void UpdateLoginFields(string username, string password)
     {
-        throw new System.NotImplementedException();
+        usernameField.Text = username;
+        passwordField.Text = password;
+    }
+
+    private void UpdateCheckbox(string username, string password)
+    {
+        if (rememberCheckBox.Checked)
+        {
+            File.WriteAllLines(UserFilename, new[] { username, password });
+        }
+        else
+        {
+            File.Delete(UserFilename);
+        }
+    }
+
+    private void InitializeFields()
+    {
+        if (File.Exists(UserFilename))
+        {
+            var userLines = File.ReadAllLines(UserFilename);
+            if (userLines.Length == 2)
+            {
+                usernameField.Text = userLines[0];
+                passwordField.Text = userLines[1];
+                rememberCheckBox.Checked = true;
+            }
+        }
     }
 }
