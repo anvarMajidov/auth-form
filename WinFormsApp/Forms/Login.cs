@@ -21,6 +21,7 @@ public partial class Login : Form
         InitializeComponent();
         InitializeFields();
 
+        FormBorderStyle = FormBorderStyle.FixedSingle; // Disable resizing
         MaximizeBox = false;
         MinimizeBox = false;
     }

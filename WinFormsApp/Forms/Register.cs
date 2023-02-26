@@ -19,6 +19,7 @@ public partial class Register : Form
 
         InitializeComponent();
 
+        FormBorderStyle = FormBorderStyle.FixedSingle; // Disable resizing
         MaximizeBox = false;
         MinimizeBox = false;
     }
